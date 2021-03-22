@@ -3,29 +3,46 @@ import { render, screen } from '@testing-library/react';
 import Episode from './../Episode';
 
 const testEpisode = {
-    id:1,
+    id: 1,
     name: "",
     image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
     season: 1,
     number: 1,
-    summary: "",
+    summary: "Hello, Newman.",
     runtime: 1
 }
 
 const testEpisodeWithoutImage = {
     //Add in approprate test data structure here.
+    id: 1,
+    name: '',
+    image: null,
+    season: 1,
+    number: 1,
+    summary: '',
+    runtime: 1
 }
 
 test("renders without error", () => {
-
+    render(<Episode props={testEpisode} />);
 });
 
 test("renders the summury test passed as prop", ()=>{
-    
+    render(<Episode props={testEpisode} />);
+
+    const summ = screen.queryByText('Hello, Newman.');
+
+    expect(summ).toBeInTheDocument();
+    expect(summ).toBeTruthy();
+    expect(summ).toHaveTextContent('Hello, Newman.');
 });
 
 test("renders default image when image is not defined", ()=>{
-    
+    render(<Episode props={testEpisodeWithoutImage} />);
+
+    const img = screen.getByAltText('./stranger_things.png');
+
+    expect(img).toBeInTheDocument();
 })
 
 //Tasks
