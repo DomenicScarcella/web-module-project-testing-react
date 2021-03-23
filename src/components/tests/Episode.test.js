@@ -24,11 +24,11 @@ const testEpisodeWithoutImage = {
 }
 
 test("renders without error", () => {
-    render(<Episode props={testEpisode} />);
+    render(<Episode episode={testEpisode} />);
 });
 
 test("renders the summury test passed as prop", ()=>{
-    render(<Episode props={testEpisode} />);
+    render(<Episode episode={testEpisode} />);
 
     const summ = screen.queryByText('Hello, Newman.');
 
@@ -38,7 +38,7 @@ test("renders the summury test passed as prop", ()=>{
 });
 
 test("renders default image when image is not defined", ()=>{
-    render(<Episode props={testEpisodeWithoutImage} />);
+    render(<Episode episode={testEpisodeWithoutImage} />);
 
     const img = screen.getByAltText('./stranger_things.png');
 
