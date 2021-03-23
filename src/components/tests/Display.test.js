@@ -42,11 +42,30 @@ test('press button and display show component', () => {
 });
 
 //5. Test that when the fetch button is pressed, the amount of select options rendered is equal to the amount of seasons in your test data.
-test('')
+test('press button and all select options appear', () => {
+    render(<Display show={testShow} />);
+    const button = screen.getByRole('button');
+    userEvent.click(button)
 
+    const seasons = screen.queryAllByTestId('season-option');
+    
+    waitFor(() =>
+        expect(seasons).toHaveLength(2)
+    );
+});
 
 //6. Notice the optional functional prop passed in to the Display component client code. Test that when the fetch button is pressed, this function is called.
+test('press button and call displayFunc', () => {
+    const mockDisplayFunc = jest.fn();
 
+    render(<Display displayFun={mockDisplayFunc} />)
+    const button = screen.getByRole('button');
+    userEvent.click(button);
+
+    waitFor(() =>
+        expect(mockDisplayFunc).toHaveBeenCalled()
+    );
+});
 
 
 
